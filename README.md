@@ -13,7 +13,7 @@
 
 ## 🔍 | Why did I do that?
 
-I thought -_-, I really thought that if the language was “compiled” it would be faster, but in this case, believe me, or test it for yourself, this here, I don't think it's even 1% faster than this same library made in TypeScript, I researched it further, and really, it's my mistake, believe me, AssemblyScript is more advisable to use in highly heavy libraries that do ridiculous and large calculations, but even so, it was a good learning experience, have a great day!
+I thought -_-, I really thought that if the language was “compiled” it would be faster, but in this case, believe me, or test it for yourself, this here, I don't think it's even 1% faster than this [same library made in TypeScript](https://github.com/Ashu11-A/truth-table), I researched it further, and really, it's my mistake, believe me, AssemblyScript is more advisable to use in highly heavy libraries that do ridiculous and large calculations, but even so, it was a good learning experience, have a great day!
 
 ### 👨‍💻 | Usage:
 Here's an example of how to work with this library:
