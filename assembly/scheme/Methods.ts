@@ -2,6 +2,7 @@ import { Analyzer } from '../class/Analyzer'
 import { Tokenizer } from './Tokanizer'
 import { BaseExpression, Expression } from './Analyzer'
 
+@json
 export class MethodRunner {
   node: Analyzer
   tokens: Array<Tokenizer>
@@ -14,6 +15,7 @@ export class MethodRunner {
   }
 }
 
+@json
 export class MethodProps<Type extends Expression> {
   type: Type
   parser: (runner: MethodRunner) => BaseExpression 

@@ -1,5 +1,17 @@
 // Importa a função principal do seu módulo
-import { convertAstToJson, convertTokensToJson, createAnalyzer, createTokanizer, getAnalyzerExceptions, getAST, getTokanizerExceptions, getTokens } from '../build/debug.js'
+import {
+  convertAstToJson,
+  convertStructureToJson,
+  convertTokensToJson,
+  createAnalyzer,
+  createStructure,
+  createTokanizer,
+  getAnalyzerExceptions,
+  getAST,
+  getStructure,
+  getTokanizerExceptions,
+  getTokens
+} from '../build/debug.js'
 
 // // Função para medir o tempo e uso de memória
 // function runTests() {
@@ -28,17 +40,21 @@ import { convertAstToJson, convertTokensToJson, createAnalyzer, createTokanizer,
 // runTests()
 
 
-const tokanizer = createTokanizer('c ^ t')
+const tokanizer = createTokanizer('p ^ (p v ~q)')
 const tokens = getTokens(tokanizer)
-const tokanizerErrors = JSON.parse(getTokanizerExceptions(tokanizer))
 
+const tokanizerErrors = JSON.parse(getTokanizerExceptions(tokanizer))
 if (tokanizerErrors.length > 0) throw console.log(tokanizerErrors)
 
 const analyzer = createAnalyzer(tokens)
 const ast = getAST(analyzer)
-const astErrors = JSON.parse(getAnalyzerExceptions(analyzer))
 
+const astErrors = JSON.parse(getAnalyzerExceptions(analyzer))
 if (astErrors.length > 0) throw console.log(astErrors)
+
+const structure = createStructure(ast)
+const tableData = getStructure(structure)
 
 console.log(JSON.parse(convertTokensToJson(tokens)))
 console.log(JSON.parse(convertAstToJson(ast)))
+console.log(JSON.parse(convertStructureToJson(tableData)))

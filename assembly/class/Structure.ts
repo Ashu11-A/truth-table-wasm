@@ -17,7 +17,7 @@ export class Structure {
       const proposition = propositions[index]
 
       this.propositions.push(proposition.value)
-      if (proposition.negatived) this.negatives.push(proposition)
+      if (proposition.negatived === true) this.negatives.push(proposition)
     }
 
     this.columns = this.propositions.length
@@ -62,19 +62,11 @@ export class Structure {
         values.push(structure)
       }
 
-      for (let index = 0; index < this.negatives.length; index++) {
-        const element = this.negatives[index]
-        let column: i32 = -1
+      for (let indexNeg = 0; indexNeg < this.negatives.length; indexNeg++) {
+        const element = this.negatives[indexNeg]
+        const column: i32 = this.getIndexValue(values, element)
 
-        for (let index = 0; index < values.length; index++) {
-          const value = values[index]
-
-          if (element.value === value.element) {
-            column = index
-          }
-        }
-
-        if (column === -1) throw new Error('Column not defined')
+        if (column === -1 ||column > this.propositions.length) throw new Error('Column not defined')
 
         const value = `~${element.value}`
 
@@ -112,6 +104,18 @@ export class Structure {
     this.propositions = removeDuplicates(this.propositions)
     this.columns = this.propositions.length
     return this
+  }
+
+  getIndexValue (values: Array<StructureScheme>, element: Proposition): i32 {
+    for (let valueIndex = 0; valueIndex < values.length; valueIndex++) {
+      const value = values[valueIndex]
+
+      if (element.value === value.element) {
+        return valueIndex
+      }
+    }
+
+    return -1
   }
 
   /**
@@ -281,14 +285,14 @@ export class Structure {
 
     for (let index = 0; index < elements.length; index++) {
       const element = elements[index]
-
+      
       if (element.getType() === Expression.Proposition) propositions.push(element as Proposition)
       if (element.getType() === Expression.SubExpression) {
         const processed = this._getPropositions((element as SubExpression).body)
-
+          
         for (let index = 0; index < processed.length; index++) {
           const proposition = processed[index]
-          processed.push(proposition)
+          propositions.push(proposition)
         }
       }
     }
